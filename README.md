@@ -1,18 +1,21 @@
 <div align="center">
     <img src="media/logo.png" width=300>
-    <h1>Blazor Leaflet</h1>
+    <h1>ACO.Blazor.Leaflet</h1>
     <div>
         <a href="#description">Description</a> •
         <a href="#installation">Installation</a> •
-        <a href="#samples">Samples</a> •
-        <a href="#contribute">Contribute</a> •
-        <a href="https://mehigh17.github.io/BlazorLeaflet">API Doc</a>
+        <a href="#samples">Samples</a>
     </div>
 </div>
 
+# License
+
+This is a fork of the not anymore maintained project [BlazorLeafet](https://github.com/Mehigh17/BlazorLeaflet) from [Mehigh17](https://github.com/Mehigh17). 
+The License itself can be found [here (MIT License)](LICENSE)
+
 # Description
 
-BlazorLeaflet is a wrapper offering easy-to-use Blazor components that expose the <a href="https://leafletjs.com/">Leaflet API</a> in C#. It allows you to create easily customizable maps without getting outside your existing .NET ecosystem.
+ACO.Blazor.Leaflet is a wrapper offering easy-to-use Blazor components that expose the <a href="https://leafletjs.com/">Leaflet API</a> in C#. It allows you to create easily customizable maps without getting outside your existing .NET ecosystem.
 
 The wrapper is still in its early days so it's very lackluster and doesn't expose the entirety of leaflet's API.
 
@@ -24,18 +27,19 @@ Check out the samples project to learn how to use it.
 
 Install the package in the target project:
 
+<b>NuGet package is not pushed yet - if you want to use this fork you have to clone it manually right now</b>
 ```
-dotnet add package BlazorLeaflet
+dotnet add package ACO.Blazor.Leaflet
 ```
 
 In your `_Host.cshtml`/`_Layout.cshtml` (Blazor Server) or `index.html` (Blazor WebAssembly), reference the interoperability script in the `<head>` element like so:
 
 ```html
-<!-- BlazorLeaflet -->
-    <script src="_content/BlazorLeaflet/leaflet/leaflet.js"></script>
-    <script src="_content/BlazorLeaflet/leaflet/Leaflet.ImageOverlay.Rotated.js"></script>
-    <script src="_content/BlazorLeaflet/leafletBlazorInterops.js"></script>
-    <link rel="stylesheet" href="_content/BlazorLeaflet/leaflet/leaflet.css"/>
+<!-- ACO.Blazor.Leaflet -->
+<script src="_content/ACO.Blazor.Leaflet/leaflet/leaflet.js"></script>
+<script src="_content/ACO.Blazor.Leaflet/leaflet/Leaflet.ImageOverlay.Rotated.js"></script>
+<script src="_content/ACO.Blazor.Leaflet/leafletBlazorInterops.js"></script>
+<link rel="stylesheet" href="_content/ACO.Blazor.Leaflet/leaflet/leaflet.css"/>
 ```
 
 You can now use the components and the rest of the library.
@@ -87,7 +91,3 @@ Or fit bounds on certain corners
 ```cs
 _map.FitBounds(new PointF(45.943f, 24.967f), new PointF(46.943f, 25.967f), maxZoom: 5f);
 ```
-
-# Contribute
-
-The `master` branch is used as the development branch. If you are looking for a specific release, check the tags. If you are willing to contribute, fork this repository, and create your own branch from master, preferably give it a meaningful name, regarding your change or the issue that you are targeting. For large modifications, create an issue before, and a WIP pull request. Always rebase before review requests.
