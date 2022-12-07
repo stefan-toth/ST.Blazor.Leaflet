@@ -36,8 +36,6 @@ In your `_Host.cshtml`/`_Layout.cshtml` (Blazor Server) or `index.html` (Blazor 
 
 ```html
 <!-- ACO.Blazor.Leaflet -->
-<script src="_content/ACO.Blazor.Leaflet/leaflet/leaflet.js"></script>
-<script src="_content/ACO.Blazor.Leaflet/leaflet/Leaflet.ImageOverlay.Rotated.js"></script>
 <script src="_content/ACO.Blazor.Leaflet/leafletBlazorInterops.js"></script>
 <link rel="stylesheet" href="_content/ACO.Blazor.Leaflet/leaflet/leaflet.css"/>
 ```
