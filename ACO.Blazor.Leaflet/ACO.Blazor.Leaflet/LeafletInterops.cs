@@ -13,7 +13,6 @@ namespace ACO.Blazor.Leaflet
 {
 	public static class LeafletInterops
 	{
-
 		private static ConcurrentDictionary<string, (IDisposable, string, Layer)> LayerReferences { get; }
 			= new ConcurrentDictionary<string, (IDisposable, string, Layer)>();
 
@@ -76,6 +75,13 @@ namespace ACO.Blazor.Leaflet
 				Polyline polyline => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updatePolyline", mapId, polyline),
 				_ => throw new NotImplementedException($"The layer {typeof(Layer).Name} has not been implemented."),
 			};
+
+		public static ValueTask BringPathToFront(this Path path, IJSRuntime jsRuntime, string mapId)
+			=> jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.bringPathToFront", mapId, path);
+
+		public static ValueTask BringPathToBack(this Path path, IJSRuntime jsRuntime, string mapId)
+			=> jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.bringPathToBack", mapId, path);
+
 
 		public static ValueTask OpenLayerPopup(IJSRuntime jsRuntime, string mapId, Marker marker)
 			=> jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.openLayerPopup", mapId, marker.Id);

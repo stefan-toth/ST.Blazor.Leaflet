@@ -153,6 +153,14 @@ window.leafletBlazor = {
             layer.setLatLng(circle.position);
         }
     },
+    bringPathToFront: function (mapId, path){
+        let layer = layers[mapId].find(l => l.id ===path.id);
+        layer.bringToFront();
+    },
+    bringPathToBack: function (mapId, path){
+        let layer = layers[mapId].find(l => l.id ===path.id);
+        layer.bringToBack();
+    },
     addImageLayer: function (mapId, image, objectReference) {
         const layerOptions = {
             ...createInteractiveLayer(image),

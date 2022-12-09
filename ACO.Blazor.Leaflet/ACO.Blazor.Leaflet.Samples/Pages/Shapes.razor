@@ -2,6 +2,7 @@
 
 @using ACO.Blazor.Leaflet.Models
 @using ACO.Blazor.Leaflet.Models.Events
+@using System.Drawing
 @inject IJSRuntime jsRuntime
 
 <h1>Blazor Leaflet </h1>
@@ -11,23 +12,23 @@
 <div class="form-inline m-2">
 	<div class="form-group mb-2">
 		<label>Lat </label>
-		<input class="form-control ml-2 mr-2" placeholder="city name" @bind="_markerLatLng.Lat" disabled="disabled" />
+		<input class="form-control ml-2 mr-2" placeholder="city name" @bind="_markerLatLng.Lat" disabled="disabled"/>
 	</div>
 
 	<div class="form-group mb-2">
 		<label>Lng </label>
-		<input class="form-control ml-2 mr-2" placeholder="city name" @bind="_markerLatLng.Lng" disabled="disabled" />
+		<input class="form-control ml-2 mr-2" placeholder="city name" @bind="_markerLatLng.Lng" disabled="disabled"/>
 	</div>
 </div>
 
 <div style="height: 500px; width: 500px;">
-	<LeafletMap Map="_map" />
+	<LeafletMap Map="_map"/>
 </div>
 
 <div class="pt-3">
-	<DrawZoneToggleButton ButtonText="Draw Rectangle" DrawHandler="_drawHandler" OnToggleCallback="_drawHandler.OnDrawRectangleToggle" />
-	<DrawZoneToggleButton ButtonText="Draw Circle" DrawHandler="_drawHandler" OnToggleCallback="_drawHandler.OnDrawCircleToggle" />
-	<DrawZoneToggleButton ButtonText="Draw Polygon" DrawHandler="_drawHandler" OnToggleCallback="_drawHandler.OnDrawPolygonToggle" />
+	<DrawZoneToggleButton ButtonText="Draw Rectangle" DrawHandler="_drawHandler" OnToggleCallback="_drawHandler.OnDrawRectangleToggle"/>
+	<DrawZoneToggleButton ButtonText="Draw Circle" DrawHandler="_drawHandler" OnToggleCallback="_drawHandler.OnDrawCircleToggle"/>
+	<DrawZoneToggleButton ButtonText="Draw Polygon" DrawHandler="_drawHandler" OnToggleCallback="_drawHandler.OnDrawPolygonToggle"/>
 	<button class="btn btn-primary mb-2" @onclick="RemoveLayers">Remove Layers</button>
 </div>
 
@@ -35,7 +36,7 @@
 {
 	private Map _map;
 	private DrawHandler _drawHandler;
-	private LatLng _markerLatLng = new LatLng { Lat = 47.5574007f, Lng = 16.3918687f };
+	private LatLng _markerLatLng = new LatLng { Lat = 54.310062f, Lng = 9.670243f };
 
 	protected override void OnInitialized()
 	{
@@ -50,7 +51,7 @@
 		_map = new Map(jsRuntime)
 		{
 			Center = _markerLatLng,
-			Zoom = 4.8f
+			Zoom = 18f
 		};
 
 		_map.OnInitialized += () =>
@@ -61,6 +62,26 @@
 				Attribution = "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
 			});
 
+			List<Circle> bringtToFront = new();
+			var front = NewCircle(new LatLng(_markerLatLng.Lat, _markerLatLng.Lng + 0.0003f), false);
+			bringtToFront.Add(front);
+
+			_map.AddLayer(NewCircle(new LatLng(_markerLatLng.Lat, _markerLatLng.Lng), true));
+			_map.AddLayer(NewCircle(new LatLng(_markerLatLng.Lat, _markerLatLng.Lng + 0.0002f), true));
+			_map.AddLayer(front);
+			for (int x = 1; x < 30; x++)
+			{
+				for (int y = 4; y < 30; y++)
+				{
+					bool isOkay = (x + y != 14);
+					var circle = NewCircle(new LatLng(_markerLatLng.Lat + (float)((Random.Shared.NextDouble() / 1000) * x), _markerLatLng.Lng + (float)((Random.Shared.NextDouble() / 1000) * y)), isOkay);
+					_map.AddLayer(circle);
+					if (!isOkay)
+						bringtToFront.Add(circle);
+				}
+			}
+
+			bringtToFront.ForEach(t => t.BringPathToFront(jsRuntime, _map.Id));
 			_map.AddLayer(marker);
 		};
 
@@ -69,6 +90,23 @@
 		marker.OnMove += OnDrag;
 		marker.OnMoveEnd += OnDragEnd;
 	}
+
+	private static Circle NewCircle(LatLng position, bool isOkay)
+	{
+		Color color = isOkay ? Color.ForestGreen : Color.DarkRed;
+		return new()
+		{
+			Position = position,
+			Radius = 7,
+			FillColor = color,
+			FillOpacity = 0.5,
+			Fill = true,
+			StrokeColor = color,
+			StrokeOpacity = (isOkay ? 0.6 : 1),
+			StrokeWidth = 4
+		};
+	}
+
 
 	private void OnDrag(Marker marker, DragEvent evt)
 	{
