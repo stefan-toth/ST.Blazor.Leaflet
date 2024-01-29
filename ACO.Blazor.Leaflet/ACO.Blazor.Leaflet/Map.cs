@@ -221,19 +221,19 @@ namespace ACO.Blazor.Leaflet
 		}
 
 
-		public ValueTask<Bounds> GetBoundsFromMarkers(params Marker[] markers)
+		public ValueTask<Bounds> GetBoundsFromMarkers(IEnumerable<Marker> markers)
 			=> LeafletInterops.GetBoundsFromMarkers(_jsRuntime, markers);
 
+		public ValueTask FitBounds(IEnumerable<Marker> markers) => FitBounds(markers, null);
 
-		public ValueTask FitBounds(params Marker[] markers) => FitBounds(markers, null, null);
-
-		public async ValueTask FitBounds(Marker[] markers, PointF? padding = null, float? maxZoom = null)
+		public async ValueTask FitBounds(IEnumerable<Marker> markers, PointF? padding, float? maxZoom = null)
 		{
 			var bounds = await GetBoundsFromMarkers(markers);
 			await FitBounds(bounds, padding, maxZoom);
 		}
 
-		public ValueTask PanTo(PointF position, bool animate = false, float duration = 0.25f, float easeLinearity = 0.25f,
+		public ValueTask PanTo(PointF position, bool animate = false, float duration = 0.25f,
+			float easeLinearity = 0.25f,
 			bool noMoveStart = false)
 		{
 			return LeafletInterops.PanTo(_jsRuntime, Id, position, animate, duration, easeLinearity, noMoveStart);

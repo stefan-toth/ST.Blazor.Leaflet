@@ -38,18 +38,31 @@ namespace ACO.Blazor.Leaflet
 		{
 			return layer switch
 			{
-				TileLayer tileLayer => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addTilelayer", mapId, tileLayer, CreateLayerReference(mapId, tileLayer)),
-				MbTilesLayer mbTilesLayer => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addMbTilesLayer", mapId, mbTilesLayer, CreateLayerReference(mapId, mbTilesLayer)),
-				ShapefileLayer shapefileLayer => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addShapefileLayer", mapId, shapefileLayer, CreateLayerReference(mapId, shapefileLayer)),
-				Marker marker => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addMarker", mapId, marker, CreateLayerReference(mapId, marker)),
-				Rectangle rectangle => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addRectangle", mapId, rectangle, CreateLayerReference(mapId, rectangle)),
-				Circle circle => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addCircle", mapId, circle, CreateLayerReference(mapId, circle)),
-				Polygon polygon => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addPolygon", mapId, polygon, CreateLayerReference(mapId, polygon)),
-				Polyline polyline => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addPolyline", mapId, polyline, CreateLayerReference(mapId, polyline)),
-				ImageRotatedLayer imageRotated => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addImageRotatedLayer", mapId, imageRotated, CreateLayerReference(mapId, imageRotated)),
-				ImageLayer image => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addImageLayer", mapId, image, CreateLayerReference(mapId, image)),
-				GeoJsonDataLayer geo => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addGeoJsonLayer", mapId, geo, CreateLayerReference(mapId, geo)),
-				HeatmapLayer heat => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addHeatLayer", mapId, heat, CreateLayerReference(mapId, heat)),
+				TileLayer tileLayer => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addTilelayer", mapId,
+					tileLayer, CreateLayerReference(mapId, tileLayer)),
+				MbTilesLayer mbTilesLayer => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addMbTilesLayer", mapId,
+					mbTilesLayer, CreateLayerReference(mapId, mbTilesLayer)),
+				ShapefileLayer shapefileLayer => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addShapefileLayer",
+					mapId, shapefileLayer, CreateLayerReference(mapId, shapefileLayer)),
+				Marker marker => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addMarker", mapId, marker,
+					CreateLayerReference(mapId, marker)),
+				Rectangle rectangle => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addRectangle", mapId,
+					rectangle, CreateLayerReference(mapId, rectangle)),
+				Circle circle => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addCircle", mapId, circle,
+					CreateLayerReference(mapId, circle)),
+				Polygon polygon => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addPolygon", mapId, polygon,
+					CreateLayerReference(mapId, polygon)),
+				Polyline polyline => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addPolyline", mapId, polyline,
+					CreateLayerReference(mapId, polyline)),
+				ImageRotatedLayer imageRotated => jsRuntime.InvokeVoidAsync(
+					$"{_BaseObjectContainer}.addImageRotatedLayer", mapId, imageRotated,
+					CreateLayerReference(mapId, imageRotated)),
+				ImageLayer image => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addImageLayer", mapId, image,
+					CreateLayerReference(mapId, image)),
+				GeoJsonDataLayer geo => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addGeoJsonLayer", mapId, geo,
+					CreateLayerReference(mapId, geo)),
+				HeatmapLayer heat => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addHeatLayer", mapId, heat,
+					CreateLayerReference(mapId, heat)),
 				_ => throw new NotImplementedException($"The layer {typeof(Layer).Name} has not been implemented."),
 			};
 		}
@@ -61,18 +74,22 @@ namespace ACO.Blazor.Leaflet
 		}
 
 		public static ValueTask UpdatePopupContent(IJSRuntime jsRuntime, string mapId, Layer layer) =>
-			jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updatePopupContent", mapId, layer.Id, layer.Popup?.Content);
+			jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updatePopupContent", mapId, layer.Id,
+				layer.Popup?.Content);
 
 		public static ValueTask UpdateTooltipContent(IJSRuntime jsRuntime, string mapId, Layer layer) =>
-			jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updateTooltipContent", mapId, layer.Id, layer.Tooltip?.Content);
+			jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updateTooltipContent", mapId, layer.Id,
+				layer.Tooltip?.Content);
 
 		public static ValueTask UpdateShape(IJSRuntime jsRuntime, string mapId, Layer layer) =>
 			layer switch
 			{
-				Models.Rectangle rectangle => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updateRectangle", mapId, rectangle),
+				Models.Rectangle rectangle => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updateRectangle",
+					mapId, rectangle),
 				Circle circle => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updateCircle", mapId, circle),
 				Polygon polygon => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updatePolygon", mapId, polygon),
-				Polyline polyline => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updatePolyline", mapId, polyline),
+				Polyline polyline => jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.updatePolyline", mapId,
+					polyline),
 				_ => throw new NotImplementedException($"The layer {typeof(Layer).Name} has not been implemented."),
 			};
 
@@ -85,17 +102,21 @@ namespace ACO.Blazor.Leaflet
 
 		public static ValueTask OpenLayerPopup(IJSRuntime jsRuntime, string mapId, Marker marker)
 			=> jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.openLayerPopup", mapId, marker.Id);
-		
-		public static ValueTask FitBounds(IJSRuntime jsRuntime, string mapId, PointF corner1, PointF corner2, PointF? padding, float? maxZoom) =>
+
+		public static ValueTask FitBounds(IJSRuntime jsRuntime, string mapId, PointF corner1, PointF corner2,
+			PointF? padding, float? maxZoom) =>
 			jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.fitBounds", mapId, corner1, corner2, padding, maxZoom);
 
 
-		public static ValueTask PanTo(IJSRuntime jsRuntime, string mapId, PointF position, bool animate, float duration, float easeLinearity, bool noMoveStart) =>
-			jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.panTo", mapId, position, animate, duration, easeLinearity, noMoveStart);
+		public static ValueTask PanTo(IJSRuntime jsRuntime, string mapId, PointF position, bool animate, float duration,
+			float easeLinearity, bool noMoveStart) =>
+			jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.panTo", mapId, position, animate, duration,
+				easeLinearity, noMoveStart);
 
 
-		public static async ValueTask<Bounds> GetBoundsFromMarkers(IJSRuntime jsRuntime, params Marker[] markers)
-			=> (await jsRuntime.InvokeAsync<_Bounds>($"{_BaseObjectContainer}.getBoundsFromMarker", new[] { markers })).AsBounds();
+		public static async ValueTask<Bounds> GetBoundsFromMarkers(IJSRuntime jsRuntime, IEnumerable<Marker> markers)
+			=> (await jsRuntime.InvokeAsync<_Bounds>($"{_BaseObjectContainer}.getBoundsFromMarker", new[] { markers }))
+				.AsBounds();
 
 		public static ValueTask<LatLng> GetCenter(IJSRuntime jsRuntime, string mapId) =>
 			jsRuntime.InvokeAsync<LatLng>($"{_BaseObjectContainer}.getCenter", mapId);
