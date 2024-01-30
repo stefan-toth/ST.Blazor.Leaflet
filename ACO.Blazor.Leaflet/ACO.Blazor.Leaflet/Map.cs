@@ -224,9 +224,7 @@ namespace ACO.Blazor.Leaflet
 		public ValueTask<Bounds> GetBoundsFromMarkers(IEnumerable<Marker> markers)
 			=> LeafletInterops.GetBoundsFromMarkers(_jsRuntime, markers);
 
-		public ValueTask FitBounds(IEnumerable<Marker> markers) => FitBounds(markers, null);
-
-		public async ValueTask FitBounds(IEnumerable<Marker> markers, PointF? padding, float? maxZoom = null)
+		public async ValueTask FitBounds(IEnumerable<Marker> markers, PointF? padding = null, float? maxZoom = null)
 		{
 			var bounds = await GetBoundsFromMarkers(markers);
 			await FitBounds(bounds, padding, maxZoom);
