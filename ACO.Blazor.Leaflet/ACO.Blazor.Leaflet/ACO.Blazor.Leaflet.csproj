@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <Version>0.5.0-alpha</Version>
+        <Version>0.6.0-alpha</Version>
         <Authors>Max Reble, Mihai Stan</Authors>
         <Company>ACO Ahlmann SE &amp; Co. KG</Company>
         <Description>BlazorLeaflet is a wrapper offering easy-to-use Blazor components that expose the Leaflet API in C#.</Description>
