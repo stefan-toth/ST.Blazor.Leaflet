@@ -32,12 +32,12 @@ Install the package in the target project:
 dotnet add package ST.Blazor.Leaflet
 ```
 
-In your `_Host.cshtml`/`_Layout.cshtml` (Blazor Server) or `index.html` (Blazor WebAssembly), reference the interoperability script in the `<head>` element like so:
+In your `App.razor`/`_Host.cshtml`/`_Layout.cshtml` (Blazor Web App / Server) or `index.html` (Blazor WebAssembly), reference the interoperability script in the `<head>` element like so:
 
 ```html
 <!-- ST.Blazor.Leaflet -->
 <script src="_content/ST.Blazor.Leaflet/leafletBlazorInterops.js"></script>
-<link rel="stylesheet" href="_content/ST.Blazor.Leaflet/leaflet/leaflet.css"/>
+<script type="module" src="_content/ST.Blazor.Leaflet/leafletBlazorInterops.js"></script>
 ```
 
 You can now use the components and the rest of the library.
@@ -47,6 +47,10 @@ You can now use the components and the rest of the library.
 Create the map
 
 ```html
+@using ST.Blazor.Leaflet
+@using ST.Blazor.Leaflet.Models
+@inject IJSRuntime jsRuntime
+
 <!-- You must wrap the map component in a container setting its actual size. -->
 <div id="mapContainer" style="width: 300px; height: 300px;">
     <LeafletMap Map="_map" />
