@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Version>0.6.0-alpha</Version>
+        <Authors>Max Reble, Mihai Stan, Stefan Toth</Authors>
+        <Description>BlazorLeaflet is a wrapper offering easy-to-use Blazor components that expose the Leaflet API in C#.</Description>
+        <Copyright>Max Reble, Mihai Stan, Stefan Toth</Copyright>
+        <RepositoryUrl>github.com/stefan-toth/ST.Blazor.Leaflet</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>blazor, leaflet, c#, js, interop</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <LangVersion>9</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
+    </ItemGroup>
+</Project>
