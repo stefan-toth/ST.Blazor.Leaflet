@@ -2,9 +2,9 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <Version>0.6.0-alpha</Version>
+        <Version>8.194</Version>
         <Authors>Max Reble, Mihai Stan, Stefan Toth</Authors>
-        <Description>BlazorLeaflet is a wrapper offering easy-to-use Blazor components that expose the Leaflet API in C#.</Description>
+        <Description>ST.Blazor.Leaflet is a wrapper offering easy-to-use Blazor components that expose the Leaflet API in C#.</Description>
         <Copyright>Max Reble, Mihai Stan, Stefan Toth</Copyright>
         <RepositoryUrl>github.com/stefan-toth/ST.Blazor.Leaflet</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
