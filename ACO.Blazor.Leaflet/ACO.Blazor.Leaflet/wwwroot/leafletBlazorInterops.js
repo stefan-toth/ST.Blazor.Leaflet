@@ -4,21 +4,41 @@ import "/_content/ACO.Blazor.Leaflet/leaflet/leaflet-heat.js";
 
 export const maps = {};
 export const layers = {};
+export const layerControls = {};
 
 window.leafletBlazor = {
     create: function (map, objectReference) {
         var leafletMap = L.map(map.id, {
             center: map.center,
             zoom: map.zoom,
-            zoomControl: map.zoomControl,
+            scrollWheelZoom: map.scrollWheelZoom,
+            touchZoom: map.touchZoom,
+            dragging: map.dragging,
+            attributionControl: map.attributionControl,
+            zoomControl: map.zoomControl,           
             minZoom: map.minZoom ? map.minZoom : undefined,
             maxZoom: map.maxZoom ? map.maxZoom : undefined,
-            maxBounds: map.maxBounds && map.maxBounds.item1 && map.maxBounds.item2 ? L.latLngBounds(map.maxBounds.item1, map.maxBounds.item2) : undefined,
+            maxBounds: map.maxBounds && map.maxBounds.northEast && map.maxBounds.southWest ? L.latLngBounds(map.maxBounds.northEast, map.maxBounds.southWest) : undefined,
         });
 
         connectMapEvents(leafletMap, objectReference);
         maps[map.id] = leafletMap;
         layers[map.id] = [];
+
+        // If enabled, add a layer control to the map
+        if (map.layersControl)
+            this.addLayerControl(map.id);
+    },
+    addLayerControl: function (mapId) {
+        if (!(mapId in layerControls)) {
+            layerControls[mapId] = L.control.layers().addTo(maps[mapId]);
+        }
+    },
+    removeLayerControl: function (mapId) {
+        if (mapId in layerControls) {
+            maps[map.id].removeLayer(layerControls[mapId]);
+            delete layerControls[mapId];
+        }
     },
     addTilelayer: function (mapId, tileLayer, objectReference) {
         const layer = L.tileLayer(tileLayer.urlTemplate, {
@@ -30,7 +50,7 @@ window.leafletBlazor = {
             updateWhenZooming: tileLayer.updateWhenZooming,
             updateInterval: tileLayer.updateInterval,
             zIndex: tileLayer.zIndex,
-            bounds: tileLayer.bounds && tileLayer.bounds.item1 && tileLayer.bounds.item2 ? L.latLngBounds(tileLayer.bounds.item1, tileLayer.bounds.item2) : undefined,
+            bounds: tileLayer.bounds && tileLayer.bounds.northEast && tileLayer.bounds.southWest ? L.latLngBounds(tileLayer.bounds.northEast, tileLayer.bounds.southWest) : undefined,
             // ---
             minZoom: tileLayer.minimumZoom,
             maxZoom: tileLayer.maximumZoom,
@@ -42,7 +62,15 @@ window.leafletBlazor = {
             detectRetina: tileLayer.detectRetina,
             // crossOrigin
         });
-        addLayer(mapId, layer, tileLayer.id);
+
+        // Add layer to the map if it is not already added
+        if (!(mapId in layers) || layers[mapId].length === 0) {
+            addLayer(mapId, layer, tileLayer.id);
+        }
+
+        // Add layer to the layer control for switching between layers
+        if (mapId in layerControls)
+            layerControls[mapId].addBaseLayer(layer, tileLayer.name);
     },
     addMbTilesLayer: function (mapId, mbTilesLayer, objectReference) {
         const layer = L.tileLayer.mbTiles(mbTilesLayer.urlTemplate, {
@@ -50,14 +78,21 @@ window.leafletBlazor = {
             minZoom: mbTilesLayer.minimumZoom,
             maxZoom: mbTilesLayer.maximumZoom
         });
-        addLayer(mapId, layer, mbTilesLayer.id);
+
+        // Add layer to the map if it is not already added
+        if (!(mapId in layers) || layers[mapId].length === 0) {
+            addLayer(mapId, layer, tileLayer.id);
+        }
+
+        // Add layer to the layer control for switching between layers
+        if (mapId in layerControls)
+            layerControls[mapId].addBaseLayer(layer, tileLayer.name);
     },
     addShapefileLayer: function (mapId, shapefileLayer, objectReference) {
         const layer = L.shapefile(shapefileLayer.urlTemplate);
         addLayer(mapId, layer, shapefileLayer.id);
     },
     addHeatLayer: function (mapId, heatLayer, objectRef) {
-
         var gradient = null;
         if (heatLayer.gradient !== null) {
             gradient = {};
@@ -413,7 +448,6 @@ function addPopup(layerObj, popup) {
         closeOnEscapeKey: popup.closeOnEscapeKey,
     });
 }
-
 
 function addLayer(mapId, layer, layerId) {
     layer.id = layerId;

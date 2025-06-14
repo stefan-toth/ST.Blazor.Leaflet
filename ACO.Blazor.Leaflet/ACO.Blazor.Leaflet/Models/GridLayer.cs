@@ -5,7 +5,6 @@ namespace ACO.Blazor.Leaflet.Models
 {
 	public abstract class GridLayer : Layer
 	{
-
 		/// <summary>
 		/// Width and height of tiles in the grid.
 		/// </summary>
@@ -28,7 +27,6 @@ namespace ACO.Blazor.Leaflet.Models
 		/// <summary>
 		/// If set, tiles will only be loaded inside the set.
 		/// </summary>
-		public Tuple<LatLng, LatLng> Bounds { get; set; }
-
+		public LatLngBounds Bounds { get; set; }
 	}
 }

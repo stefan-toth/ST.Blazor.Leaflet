@@ -34,7 +34,17 @@ namespace ACO.Blazor.Leaflet
 				value.Item1.Dispose();
 		}
 
-		public static ValueTask AddLayer(IJSRuntime jsRuntime, string mapId, Layer layer)
+        public static ValueTask AddLayerControl(IJSRuntime jsRuntime, string mapId)
+        {
+            return jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.addLayerControl", mapId);
+        }
+
+        public static ValueTask RemoveLayerControl(IJSRuntime jsRuntime, string mapId)
+        {
+            return jsRuntime.InvokeVoidAsync($"{_BaseObjectContainer}.removeLayerControl", mapId);
+        }
+
+        public static ValueTask AddLayer(IJSRuntime jsRuntime, string mapId, Layer layer)
 		{
 			return layer switch
 			{

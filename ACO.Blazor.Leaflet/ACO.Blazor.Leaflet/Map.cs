@@ -26,11 +26,31 @@ namespace ACO.Blazor.Leaflet
 		/// </summary>
 		public float Zoom { get; set; }
 
+        /// <summary>
+        /// Whether the map can be zoomed by using the mouse wheel. 
+        /// <para/>
+        /// Defaults to true.
+        /// </summary>
+        public bool ScrollWheelZoom { get; set; } = true;
 
-		/// <summary>
-		/// Map bounds
-		/// </summary>
-		public Bounds Bounds { get; private set; }
+        /// <summary>
+        /// Whether the map can be zoomed by touch-dragging with two fingers. 
+        /// <para/>
+        /// Defaults to true.
+        /// </summary>
+        public bool TouchZoom { get; set; } = true;
+
+        /// <summary>
+        /// Whether the map is draggable with mouse/touch or not.
+        /// <para/>
+        /// Defaults to true.
+        /// </summary>
+        public bool Dragging { get; set; } = true;
+
+        /// <summary>
+        /// Map bounds
+        /// </summary>
+        public Bounds Bounds { get; private set; }
 
 		/// <summary>
 		/// Minimum zoom level of the map. If not specified and at least one 
@@ -51,19 +71,33 @@ namespace ACO.Blazor.Leaflet
 		/// geographical bounds, bouncing the user back if the user tries to pan
 		/// outside the view.
 		/// </summary>
-		public Tuple<LatLng, LatLng> MaxBounds { get; set; }
+		public LatLngBounds MaxBounds { get; set; }
 
-		/// <summary>
-		/// Whether a zoom control is added to the map by default.
-		/// <para/>
-		/// Defaults to true.
-		/// </summary>
-		public bool ZoomControl { get; set; } = true;
+        /// <summary>
+        /// Whether a attribution control is added to the map by default.
+        /// <para/>
+        /// Defaults to true.
+        /// </summary>
+        public bool AttributionControl { get; set; } = true;
 
-		/// <summary>
-		/// Event raised when the component has finished its first render.
-		/// </summary>
-		public event Action OnInitialized;
+        /// <summary>
+        /// Whether a zoom control is added to the map by default.
+        /// <para/>
+        /// Defaults to true.
+        /// </summary>
+        public bool ZoomControl { get; set; } = true;
+
+        /// <summary>
+        /// Whether a layers control is added to the map by default.
+        /// <para/>
+        /// Defaults to false.
+        /// </summary>
+        public bool LayersControl { get; set; } = false;
+
+        /// <summary>
+        /// Event raised when the component has finished its first render.
+        /// </summary>
+        public event Action OnInitialized;
 
 		public string Id { get; }
 
@@ -124,7 +158,7 @@ namespace ACO.Blazor.Leaflet
 			_layers.Add(layer);
 		}
 
-		public ValueTask OpenMarkerPopup(Marker marker) => LeafletInterops.OpenLayerPopup(_jsRuntime, Id, marker);
+        public ValueTask OpenMarkerPopup(Marker marker) => LeafletInterops.OpenLayerPopup(_jsRuntime, Id, marker);
 
 		/// <summary>
 		/// Remove a layer from the map.

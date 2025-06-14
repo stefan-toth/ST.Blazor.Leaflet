@@ -11,10 +11,15 @@ namespace ACO.Blazor.Leaflet.Models
 		/// </summary>
 		public string Id { get; }
 
-		/// <summary>
-		/// By default the layer will be added to the map's overlay pane. Overriding this option will cause the layer to be placed on another pane by default.
-		/// </summary>
-		public virtual string Pane { get; set; } = "overlayPane";
+        /// <summary>
+        /// The name of the tile layer. This is used to identify the layer in the map.
+        /// </summary>
+        public string Name { get; set; } = "Default";
+
+        /// <summary>
+        /// By default the layer will be added to the map's overlay pane. Overriding this option will cause the layer to be placed on another pane by default.
+        /// </summary>
+        public virtual string Pane { get; set; } = "overlayPane";
 
 		/// <summary>
 		/// String to be shown in the attribution control, e.g. "© OpenStreetMap contributors". It describes the layer data and is often a legal obligation towards copyright holders and tile providers.
