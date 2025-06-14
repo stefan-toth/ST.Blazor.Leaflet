@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <Version>8.194.1</Version>
+        <Version>8.194.3</Version>
         <Authors>Max Reble, Mihai Stan, Stefan Toth</Authors>
         <Description>ST.Blazor.Leaflet is a wrapper offering easy-to-use Blazor components that expose the Leaflet API in C#.</Description>
         <Copyright>Max Reble, Mihai Stan, Stefan Toth</Copyright>
@@ -14,7 +14,12 @@
         <LangVersion>9</LangVersion>
         <PackageProjectUrl>github.com/stefan-toth/ST.Blazor.Leaflet</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>logo.png</PackageIcon>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Content Include="logo.png" />
+    </ItemGroup>
 
     <ItemGroup>
       <None Include="..\..\README.md">
@@ -26,5 +31,12 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.17" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.17" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="logo.png">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
     </ItemGroup>
 </Project>
