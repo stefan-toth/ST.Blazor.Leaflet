@@ -1,6 +1,6 @@
 <div align="center">
     <img src="media/logo.png" width=300>
-    <h1>ACO.Blazor.Leaflet</h1>
+    <h1>ST.Blazor.Leaflet</h1>
     <div>
         <a href="#description">Description</a> •
         <a href="#installation">Installation</a> •
@@ -10,12 +10,12 @@
 
 # License
 
-This is a fork of the not anymore maintained project [BlazorLeafet](https://github.com/Mehigh17/BlazorLeaflet) from [Mehigh17](https://github.com/Mehigh17). 
+This is a fork of the project [ACO.Blazor.Leaflet](https://github.com/ACOAhlmann/ACO.Blazor.Leaflet) from [ACO Ahlmann SE & Co. KG](https://github.com/ACOAhlmann) and [BlazorLeafet](https://github.com/Mehigh17/BlazorLeaflet) from [Mehigh17](https://github.com/Mehigh17). 
 The License itself can be found [here (MIT License)](LICENSE)
 
 # Description
 
-ACO.Blazor.Leaflet is a wrapper offering easy-to-use Blazor components that expose the <a href="https://leafletjs.com/">Leaflet API</a> in C#. It allows you to create easily customizable maps without getting outside your existing .NET ecosystem.
+ST.Blazor.Leaflet is a wrapper offering easy-to-use Blazor components that expose the <a href="https://leafletjs.com/">Leaflet API</a> in C#. It allows you to create easily customizable maps without getting outside your existing .NET ecosystem.
 
 The wrapper is still in its early days so it's very lackluster and doesn't expose the entirety of leaflet's API.
 
@@ -29,15 +29,15 @@ Install the package in the target project:
 
 <b>NuGet package is not pushed yet - if you want to use this fork you have to clone it manually right now</b>
 ```
-dotnet add package ACO.Blazor.Leaflet
+dotnet add package ST.Blazor.Leaflet
 ```
 
 In your `_Host.cshtml`/`_Layout.cshtml` (Blazor Server) or `index.html` (Blazor WebAssembly), reference the interoperability script in the `<head>` element like so:
 
 ```html
-<!-- ACO.Blazor.Leaflet -->
-<script src="_content/ACO.Blazor.Leaflet/leafletBlazorInterops.js"></script>
-<link rel="stylesheet" href="_content/ACO.Blazor.Leaflet/leaflet/leaflet.css"/>
+<!-- ST.Blazor.Leaflet -->
+<script src="_content/ST.Blazor.Leaflet/leafletBlazorInterops.js"></script>
+<link rel="stylesheet" href="_content/ST.Blazor.Leaflet/leaflet/leaflet.css"/>
 ```
 
 You can now use the components and the rest of the library.
