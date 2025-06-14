@@ -1,5 +1,5 @@
-<div align="center">
-    <img src="media/logo.png" width=300>
+<div align="center">  
+    <img src="ST.Blazor.Leaflet/ST.Blazor.Leaflet/logo.png" width=100 />
     <h1>ST.Blazor.Leaflet</h1>
     <div>
         <a href="#description">Description</a> •
@@ -11,7 +11,7 @@
 # License
 
 This is a fork of the project [ACO.Blazor.Leaflet](https://github.com/ACOAhlmann/ACO.Blazor.Leaflet) from [ACO Ahlmann SE & Co. KG](https://github.com/ACOAhlmann) and [BlazorLeafet](https://github.com/Mehigh17/BlazorLeaflet) from [Mehigh17](https://github.com/Mehigh17). 
-The License itself can be found [here (MIT License)](LICENSE)
+The License itself can be found [here (MIT License)](LICENSE).
 
 # Description
 
@@ -25,9 +25,8 @@ Check out the samples project to learn how to use it.
 
 # Installation
 
-Install the package in the target project:
+Install the package in the target project from [NuGet](https://www.nuget.org/packages/ST.Blazor.Leaflet):
 
-<b>NuGet package is not pushed yet - if you want to use this fork you have to clone it manually right now</b>
 ```
 dotnet add package ST.Blazor.Leaflet
 ```
